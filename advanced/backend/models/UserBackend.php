@@ -20,6 +20,8 @@ use yii\base\NotSupportedException;
  */
 class UserBackend extends ActiveRecord implements IdentityInterface
 {
+    public $password;
+
     /**
      * @inheritdoc
      */
@@ -34,12 +36,16 @@ class UserBackend extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
+            [['username', 'password', 'email'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['username', 'password_hash', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
+            ['username', 'string', 'min' => 3, 'max' => 30],
+            ['password', 'string', 'min' => 6, 'tooShort' => '密码至少填写6位'],
+            ['email', 'email'],
             [['email'], 'unique'],
+            [['created_at', 'updated_at'], 'default', 'value' => date('Y-m-d H:i:s')],
         ];
     }
 
@@ -142,6 +148,22 @@ class UserBackend extends ActiveRecord implements IdentityInterface
     public function generateAuthKey()
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     * Signs user up.
+     *
+     * @return true|false 添加成功或者添加失败
+     */
+    public function signup()
+    {
+        // 设置密码，密码肯定要加密
+        $this->setPassword($this->password);
+
+        // 生成 "remember me" 认证key
+        $this->generateAuthKey();
+
+        return $this->save();
     }
 
 }
