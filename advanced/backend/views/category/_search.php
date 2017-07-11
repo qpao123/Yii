@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="category-search">
+<div class="category-search" style="padding-top:10px;">
     <?php $form = ActiveForm::begin([
         'action'  => ['index'],
         'method'  => 'get',
@@ -23,28 +23,24 @@ use yii\widgets\ActiveForm;
                 'placeholder' => 'ID',
             ]) ?>
         </div>
-
         <div class="form-group">
             <?= Html::textInput('name', Yii::$app->request->get('name'), [
                 'class'       => 'input-sm input-s form-control',
                 'placeholder' => 'Name',
             ]) ?>
         </div>
-
         <div class="form-group">
             <?= Html::textInput('pid', Yii::$app->request->get('pid'), [
                 'class'       => 'input-sm input-s form-control',
                 'placeholder' => 'Pid',
             ]) ?>
         </div>
-
         <div class="form-group">
             <?= Html::textInput('path', Yii::$app->request->get('path'), [
                 'class'       => 'input-sm input-s form-control',
                 'placeholder' => 'Path',
             ]) ?>
         </div>
-
         <div class="form-group">
             <?= Html::dropDownList(
                 'status',
@@ -59,11 +55,18 @@ use yii\widgets\ActiveForm;
                 ]
             ) ?>
         </div>
-
         <div class="form-group">
-            <?= Html::submitButton('Search', ['class' => 'btn btn-primary btn-sm']) ?>
-            <?= Html::resetButton('Reset', ['class' => 'btn btn-default btn-sm btn-reset']) ?>
+            <?= Html::submitButton('搜索', ['class' => 'btn btn-primary btn-sm btn-search']) ?>
+            <?= Html::resetButton('重置搜索条件', ['class' => 'btn btn-default btn-sm btn-reset']) ?>
         </div>
+    </div>
+
+    <div style="margin-bottom:10px;">
+        <?= Html::a('新增', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a('下载', 'javascript:void(0);', [
+            'class'  => 'btn btn-sm btn-info btn-download',
+            'target' => '_blank',
+        ]); ?>
     </div>
 
     <?php ActiveForm::end(); ?>

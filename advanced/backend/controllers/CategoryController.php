@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Category;
 use backend\models\CategorySearch;
+use common\helpers\Download;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -117,6 +118,37 @@ class CategoryController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionCsv()
+    {
+        $searchModel = new CategorySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        Download::downloadCsv(sprintf('Category%s.csv', date('Y-m-d')), $dataProvider->query, [
+            [
+                'label' => 'ID',
+                'value' => 'id',
+            ],
+            [
+                'label' => 'Name',
+                'value' => 'name',
+            ],
+            [
+                'label' => 'Pid',
+                'value' => 'pid',
+            ],
+            [
+                'label' => 'Path',
+                'value' => 'path',
+            ],
+            [
+                'label' => 'Status',
+                'value' => function ($item) {
+                    return $item['status'] == 1 ? '显示' : '不显示';
+                },
+            ]
+        ]);
     }
 
     /**

@@ -20,10 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 <div class="category-index">
+    <h1><?= Html::encode($this->title) ?></h1>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-    <p>
-        <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -82,3 +80,22 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 </div>
+<script>
+    $('.btn-download').on('click',function(){
+        if (!validate()) {
+            return false;
+        }
+        $("#category-search-form").attr("action", "/category/csv").submit();
+    })
+
+    $('.btn-search').on('click',function () {
+        if (!validate()) {
+            return false;
+        }
+        $("#category-search-form").attr("action", "/category/index").submit();
+    });
+
+    function validate() {
+        return true;
+    }
+</script>
