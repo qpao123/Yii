@@ -47,9 +47,10 @@ class CategorySearch extends Category
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => ['pageSize' => 6] //分页条数
         ]);
 
-        $this->load($params);
+        $this->load($params, ''); //搜索提交时候没有带控制器名称，这样写才能赋值给$this
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
