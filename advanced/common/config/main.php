@@ -1,5 +1,6 @@
 <?php
 return [
+    'on beforeAction' => ['common\helpers\Log', 'addAccess'],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [
@@ -12,5 +13,5 @@ return [
     // 配置语言
     'language'=>'zh-CN',
     // 配置时区
-    'timeZone'=>'Asia/Chongqing',
+    'timeZone'=>'Asia/Shanghai',
 ];
