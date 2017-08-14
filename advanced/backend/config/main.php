@@ -31,7 +31,11 @@ return [
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
+            'class' => 'yii\web\CacheSession',
+            'cache' => 'cache',
             'name' => 'advanced-backend',
+
+
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -39,6 +43,22 @@ return [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
+                ],
+                [
+                    'class'       => 'yii\log\FileTarget',
+                    'levels'      => ['error'],
+                    'categories'  => ['user'],
+                    'logFile'     => '@app/runtime/logs/error/user.log',
+                    'maxFileSize' => 1024 * 2,
+                    'maxLogFiles' => 5,
+                ],
+                [
+                    'class'       => 'yii\log\FileTarget',
+                    'levels'      => ['info'],
+                    'categories'  => ['category'],
+                    'logFile'     => '@app/runtime/logs/info/category.log',
+                    'maxFileSize' => 1024 * 2,
+                    'maxLogFiles' => 5,
                 ],
             ],
         ],

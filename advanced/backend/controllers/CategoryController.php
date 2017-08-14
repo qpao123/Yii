@@ -39,6 +39,19 @@ class CategoryController extends Controller
         $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        //记录一个类别为category的日志，一般在try catch中使用
+//        try {
+//
+//        } catch (\Exception $e) {
+//            Yii::info(sprintf(
+//                '测试日志,原因:%s,日志:%s',
+//                $e->getMessage(),
+//                $e->getTraceAsString()
+//            ), 'category');
+//        }
+        $msg = '条件出错！';
+        Yii::info(sprintf('测试日志，消息：%s',$msg), 'category');
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

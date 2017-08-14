@@ -38,6 +38,10 @@ class UserBackendController extends Controller
         $searchModel = new UserBackendSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        //记录一个类别为user的日志
+        $msg = '这是一个测试日志';
+        Yii::error(sprintf('测试日志，原因是：%s', $msg), 'user');
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
