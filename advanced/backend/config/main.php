@@ -33,9 +33,7 @@ return [
             // this is the name of the session cookie used for login on the backend
             'class' => 'yii\web\CacheSession',
             'cache' => 'cache',
-            'name' => 'advanced-backend',
-
-
+            'name'  => 'shawn-zheng',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
