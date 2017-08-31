@@ -2,6 +2,7 @@
 
 namespace backend\assets;
 
+use yii\web\View;
 use yii\web\AssetBundle;
 
 /**
@@ -16,6 +17,11 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
     ];
+
+    public $jsOptions = [
+        'position' => View::POS_HEAD,
+    ];
+
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',

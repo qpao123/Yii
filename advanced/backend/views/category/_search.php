@@ -71,4 +71,5 @@ use yii\widgets\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 </div>
-<script src="/js/common-search.js"></script>
+
+<script src="<?= Yii::getAlias("@web").'/js/common-search.js' ?>" ></script>

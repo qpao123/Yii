@@ -31,8 +31,8 @@ return [
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
-            'class' => 'yii\web\CacheSession',
-            'cache' => 'cache',
+            //'class' => 'yii\web\CacheSession',
+            //'cache' => 'cache',
             'name'  => 'shawn-zheng',
         ],
         'log' => [
